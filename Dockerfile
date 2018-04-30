@@ -6,6 +6,4 @@ ENV PATH="/opt/conda/bin:${PATH}"
 RUN conda update -n base conda
 COPY env.txt /tmp/env.txt
 RUN conda env create -f=/tmp/env.txt -n kelp
-COPY clone.sh /tmp/clone.sh
-RUN /tmp/clone.sh
 CMD ["/opt/conda/envs/kelp/bin/ipcluster", "start", "--n=10"]
