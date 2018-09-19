@@ -5,5 +5,5 @@ RUN ./Miniconda3-latest-Linux-x86_64.sh -p /opt/conda -b
 ENV PATH="/opt/conda/bin:${PATH}"
 RUN conda update -n base conda
 COPY env.yml /tmp/env.yml
-RUN conda env create -f=/tmp/env.yml -n kelp
+RUN conda env update -f=/tmp/env.yml
 CMD ["/opt/conda/envs/kelp/bin/ipcluster", "start", "--n=10"]
