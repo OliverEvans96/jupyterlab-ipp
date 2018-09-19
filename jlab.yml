@@ -16,10 +16,10 @@ spec:
         image: gitlab-registry.nautilus.optiputer.net/oliverevans96/jupyterlab-ipp/jlab
         env:
         - name: SCRATCH
-          value: "/scratch"
+          value: "/home/jovyan/scratch"
         volumeMounts:
         - name: scratch-vol
-          mountPath: /scratch
+          mountPath: /home/jovyan/scratch
         - name: jupyter-config-vol
           mountPath: /home/jovyan/.jupyter
         - name: ipython-config-vol
