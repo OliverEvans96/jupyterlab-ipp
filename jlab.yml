@@ -114,11 +114,11 @@ spec:
     protocol: TCP
     port: 43201
     targetPort: 43201
-  - name: engine-hb_ping
+  - name: engine-hb-ping
     protocol: TCP
     port: 59543
     targetPort: 59543
-  - name: engine-hb_pong
+  - name: engine-hb-pong
     protocol: TCP
     port: 33721
     targetPort: 33721
