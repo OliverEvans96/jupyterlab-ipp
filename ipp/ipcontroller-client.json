@@ -1,0 +1,16 @@
+{
+  "ssh": "",
+  "interface": "tcp://*",
+  "registration": 47137,
+  "control": 58083,
+  "mux": 51855,
+  "task": 44815,
+  "task_scheme": "leastload",
+  "iopub": 43985,
+  "notification": 33805,
+  "key": "95e2df89-6e5042de7bbc30d8c21667a5",
+  "location": "oliver-arch",
+  "pack": "json",
+  "unpack": "json",
+  "signature_scheme": "hmac-sha256"
+}

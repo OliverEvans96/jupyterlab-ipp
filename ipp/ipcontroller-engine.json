@@ -1,0 +1,16 @@
+{
+  "ssh": "",
+  "interface": "tcp://*",
+  "registration": 47137,
+  "control": 55613,
+  "mux": 43201,
+  "hb_ping": 59543,
+  "hb_pong": 33721,
+  "task": 46615,
+  "iopub": 42121,
+  "key": "95e2df89-6e5042de7bbc30d8c21667a5",
+  "location": "oliver-arch",
+  "pack": "json",
+  "unpack": "json",
+  "signature_scheme": "hmac-sha256"
+}
