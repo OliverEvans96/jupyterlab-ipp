@@ -25,6 +25,7 @@ RUN jupyter labextension install \
     ipyvolume@0.4.5 \
     jupyter-leaflet@0.7.1 \
     jupyterlab_vim@0.7.0 \
+    jupyterlab-toc@0.2.1
 
 
 COPY WidgetTest.ipynb /home/jovyan
