@@ -6,4 +6,4 @@ ENV PATH="/opt/conda/bin:${PATH}"
 RUN conda update -n base conda
 COPY env.yml /tmp/env.yml
 RUN conda env update -f=/tmp/env.yml
-CMD ["/opt/conda/envs/kelp/bin/ipcluster", "start", "--n=10"]
+CMD ["/opt/conda/envs/kelp/bin/ipengine"]
