@@ -73,32 +73,6 @@ spec:
 ---
 # IPyParallel Cluster
 ---
-# Configuration
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ipcontroller-client-config
-data: &client-conf
-  registration: 47137,
-  control: 58083,
-  mux: 51855,
-  task: 44815,
-  iopub: 43985,
-  notification: 33805,
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ipcontroller-engine-config
-data: &engine-conf
-  registration: 47137,
-  control: 55613,
-  mux: 43201,
-  hb_ping: 59543,
-  hb_pong: 33721,
-  task: 46615,
-  iopub: 42121,
----
 # IPController Service
 kind: Service
 apiVersion: v1
@@ -108,54 +82,55 @@ spec:
   selector:
     app: ipcontroller
   ports:
-    # registration
-  - protocol: TCP
+  - name: registration
+    protocol: TCP
     port: 47137
     targetPort: 47137
-    # client-control
-  - protocol: TCP
+  - name: client-control
+    protocol: TCP
     port: 58083
     targetPort: 58083
-    # client-mux
-  - protocol: TCP
+  - name: client-mux
+    protocol: TCP
     port: 51855
     targetPort: 51855
-    # client-task
-  - protocol: TCP
+  - name: client-task
+    protocol: TCP
     port: 44815
     targetPort: 44815
-    # client-iopub
-  - protocol: TCP
+  - name: client-iopub
+    protocol: TCP
     port: 43985
     targetPort: 43985
-    # client-notification
-  - protocol: TCP
+  - name: client-notification
+    protocol: TCP
     port: 33805
     targetPort: 33805
-    # engine-control
-  - protocol: TCP
+  - name: engine-control
+    protocol: TCP
     port: 55613
     targetPort: 55613
-    # engine-mux
-  - protocol: TCP
+  - name: engine-mux
+    protocol: TCP
     port: 43201
     targetPort: 43201
-    # engine-hb_ping
-  - protocol: TCP
+  - name: engine-hb_ping
+    protocol: TCP
     port: 59543
     targetPort: 59543
-    # engine-hb_pong
-  - protocol: TCP
+  - name: engine-hb_pong
+    protocol: TCP
     port: 33721
     targetPort: 33721
-    # engine-task
-  - protocol: TCP
+  - name: engine-task
+    protocol: TCP
     port: 46615
     targetPort: 46615
-    # engine-iopub
-  - protocol: TCP
+  - name: engine-iopub
+    protocol: TCP
     port: 42121
     targetPort: 42121
+
 ---
 # IPController
 apiVersion: apps/v1beta1
