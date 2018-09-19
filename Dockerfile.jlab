@@ -4,7 +4,7 @@ USER root
 RUN apt-get update && apt-get install -y python-igraph
 USER jovyan
 
-COPY ../env.yml /tmp/env.yml
+COPY env.yml /tmp/env.yml
 RUN conda env update -f=/tmp/env.yml
 
 RUN conda install -c conda-forge jupyterlab=0.32.0 \
