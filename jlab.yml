@@ -173,6 +173,7 @@ kind: Deployment
 metadata:
   name: ipengine
 spec:
+  replicas: 4
   template:
     metadata:
       labels:
