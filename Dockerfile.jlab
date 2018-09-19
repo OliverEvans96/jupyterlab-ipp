@@ -25,6 +25,6 @@ RUN jupyter labextension install \
     @jupyterlab/toc
 
 
-COPY WidgetTest.ipynb /home/jovyan
+COPY jlab/WidgetTest.ipynb /home/jovyan
 
 CMD ["start.sh", "jupyter", "lab"]
