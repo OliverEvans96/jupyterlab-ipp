@@ -1,7 +1,6 @@
 # Automaticall build images on push
 # Based on https://docs.gitlab.com/ee/ci/docker/using_kaniko.html
-
-build:
+build-jlab:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -9,7 +8,24 @@ build:
   script:
     - mkdir -p /root/.docker
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /root/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG --destination $CI_REGISTRY_IMAGE:latest
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.jlab --destination $CI_REGISTRY_IMAGE/jlab:$CI_COMMIT_TAG --destination $CI_REGISTRY_IMAGE/jlab:latest
+  # Only build git commits with tags
+  only:
+    - tags
+  # Give this CI job the tag "build-as-docker" (in GitLab, not git),
+  # so that the nautilus shared runners will pick up the job.
+  tags:
+    - build-as-docker
+
+build-ipp:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /root/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /root/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.ipp --destination $CI_REGISTRY_IMAGE/ipp:$CI_COMMIT_TAG --destination $CI_REGISTRY_IMAGE/ipp:latest
   # Only build git commits with tags
   only:
     - tags
