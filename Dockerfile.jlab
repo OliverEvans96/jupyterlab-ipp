@@ -7,12 +7,12 @@ USER jovyan
 COPY env.yml /tmp/env.yml
 RUN conda env update -f=/tmp/env.yml
 
-RUN conda install -c conda-forge jupyterlab=0.32.0 \
-                                 ipywidgets=7.2.1 \
-                                 ipyvolume=0.4.5 \
-                                 bqplot=0.10.2 \
-                                 plotly=2.4.1 \
-                                 ipyleaflet=0.7.1
+RUN conda install -c conda-forge jupyterlab \
+                                 ipywidgets \
+                                 ipyvolume \
+                                 bqplot \
+                                 plotly \
+                                 ipyleaflet
 
 RUN pip install python-igraph sympy
 
