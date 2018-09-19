@@ -9,7 +9,7 @@
   "task": 46615,
   "iopub": 42121,
   "key": "95e2df89-6e5042de7bbc30d8c21667a5",
-  "location": "oliver-arch",
+  "location": "ipcontroller-service",
   "pack": "json",
   "unpack": "json",
   "signature_scheme": "hmac-sha256"
