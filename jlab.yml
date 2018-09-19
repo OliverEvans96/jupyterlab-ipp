@@ -155,7 +155,7 @@ spec:
         - name: scratch-vol
           mountPath: /scratch
         - name: ipython-config-vol
-          mountPath: /root/.ipython
+          mountPath: /home/jovyan/.ipython
       volumes:
       - name: scratch-vol
         nfs:
@@ -190,7 +190,7 @@ spec:
         - name: scratch-vol
           mountPath: /scratch
         - name: ipython-config-vol
-          mountPath: /root/.ipython
+          mountPath: /home/jovyan/.ipython
       volumes:
       - name: scratch-vol
         nfs:
