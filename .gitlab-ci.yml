@@ -16,6 +16,8 @@ build-jlab:
   # so that the nautilus shared runners will pick up the job.
   tags:
     - build-as-docker
+  variables:
+    GET_SOURCES_ATTEMPTS: 3
 
 build-ipp:
   stage: build
@@ -33,3 +35,5 @@ build-ipp:
   # so that the nautilus shared runners will pick up the job.
   tags:
     - build-as-docker
+  variables:
+    GET_SOURCES_ATTEMPTS: 3
