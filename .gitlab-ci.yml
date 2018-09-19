@@ -13,7 +13,7 @@ stages:
   stage: build
   # Only run build for tagged git commits
   only:
-    tags
+    - tags
   # Tag build job so that it will be picked
   # up by shared gitlab-runners.
   tags:
