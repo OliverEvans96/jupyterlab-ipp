@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y python-igraph
 USER jovyan
 
 COPY env.yml /tmp/env.yml
-RUN conda env update -f=/tmp/env.yml
+RUN conda env update -f=/tmp/env.yml -n base
 
 RUN conda install -c conda-forge jupyterlab \
                                  ipywidgets \
