@@ -1,7 +1,6 @@
 FROM jupyter/scipy-notebook
 
 USER root
-RUN apt-get update && apt-get install -y python-igraph
 USER jovyan
 
 COPY env.yml /tmp/env.yml
