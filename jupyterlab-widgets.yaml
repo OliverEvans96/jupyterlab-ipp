@@ -1,0 +1,130 @@
+---
+# Shared Storage
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jupyterlab-storage
+spec:
+  storageClassName: rook-block
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+# Jupyterlab
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: jupyterlab-deployment
+spec:
+  template:
+    metadata:
+      labels:
+        app: jupyterlab
+    spec:
+      containers:
+      - name: jupyterlab-container
+        image: oliverevans96/jupyterlab-widgets
+        volumeMounts:
+        - name: jupyterlab-storage-vol
+          mountPath: /home/jovyan/work
+        - name: jupyter-config-vol
+          mountPath: /home/jovyan/.jupyter/jupyter_notebook_config.py
+          subPath: jupyter_notebook_config.py
+      volumes:
+      - name: jupyterlab-storage-vol
+        persistentVolumeClaim:
+          claimName: jupyterlab-storage
+      - name: jupyter-config-vol
+        secret:
+          secretName: jupyter-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-jupyterlab
+  labels:
+    app: jupyterlab
+spec:
+  selector:
+    app: jupyterlab
+  ports:
+  - port: 80
+    targetPort: 8888
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-jupyterlab
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: jupyterlab-widgets.nautilus.optiputer.net
+    http:
+      paths:
+      - backend:
+          serviceName: traefik-jupyterlab
+          servicePort: 80
+---
+# IPyParallel Cluster
+---
+
+apiversion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ipcontroller
+spec:
+  template:
+    metadata:
+      labels:
+        app: ipcluster
+    spec:
+      containers:
+      - name: jupyterlab-container
+        image: oliverevans96/ipcontroller
+        volumemounts:
+        - name: jupyterlab-storage-vol
+          mountpath: /home/jovyan/work
+        - name: jupyter-config-vol
+          mountpath: /home/jovyan/.jupyter/jupyter_notebook_config.py
+          subpath: jupyter_notebook_config.py
+      volumes:
+      - name: jupyterlab-storage-vol
+        persistentvolumeclaim:
+          claimname: jupyterlab-storage
+      - name: jupyter-config-vol
+        secret:
+          secretname: jupyter-config
+---
+apiversion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ipengine
+spec:
+  template:
+    metadata:
+      labels:
+        app: ipcluster
+    spec:
+      containers:
+      - name: jupyterlab-container
+        image: oliverevans96/jupyterlab-widgets
+        volumemounts:
+        - name: jupyterlab-storage-vol
+          mountpath: /home/jovyan/work
+        - name: jupyter-config-vol
+          mountpath: /home/jovyan/.jupyter/jupyter_notebook_config.py
+          subpath: jupyter_notebook_config.py
+      volumes:
+      - name: jupyterlab-storage-vol
+        persistentvolumeclaim:
+          claimname: jupyterlab-storage
+      - name: jupyter-config-vol
+        secret:
+          secretname: jupyter-config
+

@@ -1,0 +1,54 @@
+apiversion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ipcontroller
+spec:
+  template:
+    metadata:
+      labels:
+        app: ipcluster
+    spec:
+      containers:
+      - name: jupyterlab-container
+        image: oliverevans96/jupyterlab-widgets
+        volumemounts:
+        - name: jupyterlab-storage-vol
+          mountpath: /home/jovyan/work
+        - name: jupyter-config-vol
+          mountpath: /home/jovyan/.jupyter/jupyter_notebook_config.py
+          subpath: jupyter_notebook_config.py
+      volumes:
+      - name: jupyterlab-storage-vol
+        persistentvolumeclaim:
+          claimname: jupyterlab-storage
+      - name: jupyter-config-vol
+        secret:
+          secretname: jupyter-config
+---
+apiversion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ipcluster
+spec:
+  template:
+    metadata:
+      labels:
+        app: jupyterlab
+    spec:
+      containers:
+      - name: jupyterlab-container
+        image: oliverevans96/jupyterlab-widgets
+        volumemounts:
+        - name: jupyterlab-storage-vol
+          mountpath: /home/jovyan/work
+        - name: jupyter-config-vol
+          mountpath: /home/jovyan/.jupyter/jupyter_notebook_config.py
+          subpath: jupyter_notebook_config.py
+      volumes:
+      - name: jupyterlab-storage-vol
+        persistentvolumeclaim:
+          claimname: jupyterlab-storage
+      - name: jupyter-config-vol
+        secret:
+          secretname: jupyter-config
+
